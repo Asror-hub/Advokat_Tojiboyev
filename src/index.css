@@ -2304,31 +2304,57 @@ main.pad-top {
   gap: 14px;
 }
 .acc {
-  border-radius: 22px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
   background: #fff;
   border: 1px solid var(--line);
   box-shadow: var(--shadow-sm);
   transition: opacity 0.9s var(--ease) var(--d, 0ms), translate 0.9s var(--ease) var(--d, 0ms),
-    border-color 0.3s, box-shadow 0.3s;
+    background 0.5s var(--ease), border-color 0.3s, box-shadow 0.4s;
+}
+/* gold bar on the left edge: grows on hover, stays when the card is open */
+.acc::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold-deep));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s var(--ease);
+}
+.acc:hover {
+  border-color: rgba(201, 168, 92, 0.55);
+  box-shadow: var(--shadow);
+}
+.acc:hover::before,
+.acc.open::before {
+  transform: scaleY(1);
 }
 .acc.open {
-  border-color: rgba(201, 168, 92, 0.7);
-  box-shadow: var(--shadow);
+  background: linear-gradient(160deg, var(--navy-800), var(--navy-950));
+  border-color: rgba(201, 168, 92, 0.55);
+  box-shadow: var(--shadow-lg);
+  color: #fff;
 }
 .acc-head {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 22px 26px;
+  padding: 24px 28px 24px 32px;
   border: 0;
   background: transparent;
+  color: inherit;
   text-align: left;
 }
 .acc-title {
   flex: 1;
   display: grid;
-  gap: 2px;
+  gap: 4px;
 }
 .acc-title small {
   font-size: 0.7rem;
@@ -2336,58 +2362,133 @@ main.pad-top {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold-deep);
+  transition: color 0.3s;
 }
 .acc-title strong {
   font-family: var(--serif);
   font-size: clamp(1.4rem, 2.4vw, 1.9rem);
   line-height: 1.15;
+  transition: color 0.3s;
 }
+.acc.open .acc-title small {
+  color: var(--gold-light);
+}
+.acc.open .acc-title strong {
+  color: #fff;
+}
+.acc.open .bicon {
+  color: var(--gold-light);
+  background: rgba(201, 168, 92, 0.14);
+  border-color: rgba(232, 210, 154, 0.45);
+}
+/* plus that turns into a minus */
 .acc-toggle {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid var(--line);
-  transition: all 0.3s;
+  transition: background 0.3s, border-color 0.3s, transform 0.5s var(--ease);
 }
-.acc-toggle svg {
-  transition: transform 0.4s var(--ease);
+.acc-toggle::before,
+.acc-toggle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 2px;
+  margin: -1px 0 0 -8px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.4s var(--ease), background 0.3s;
 }
-.acc.open .acc-toggle svg {
-  transform: rotate(180deg);
+.acc-toggle::after {
+  transform: rotate(90deg);
+}
+.acc-head:hover .acc-toggle {
+  border-color: var(--gold);
 }
 .acc.open .acc-toggle {
   background: var(--gold);
   border-color: var(--gold);
   color: var(--navy-950);
+  transform: rotate(180deg);
+}
+.acc.open .acc-toggle::after {
+  transform: rotate(0deg);
 }
 .acc-panel {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s var(--ease);
+  /* hidden when closed, so the links inside cannot be reached with the Tab key */
+  visibility: hidden;
+  transition: grid-template-rows 0.5s var(--ease), visibility 0s linear 0.5s;
 }
 .acc.open .acc-panel {
   grid-template-rows: 1fr;
+  visibility: visible;
+  transition-delay: 0s;
 }
 .acc-panel > div {
   overflow: hidden;
 }
 .acc-panel ul {
   display: grid;
-  gap: 12px;
-  padding: 4px 26px 28px 96px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 4px 28px 8px 32px;
 }
 .acc-panel li {
   display: flex;
   gap: 12px;
-  align-items: flex-start;
-  color: #333f52;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(233, 237, 244, 0.92);
+  line-height: 1.4;
+  /* the points slide in one after another when the card opens */
+  opacity: 0;
+  translate: 0 10px;
+  transition: opacity 0.4s var(--ease), translate 0.4s var(--ease), background 0.3s, border-color 0.3s;
+}
+.acc.open .acc-panel li {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: calc(0.12s + var(--i, 0) * 70ms), calc(0.12s + var(--i, 0) * 70ms), 0s, 0s;
+}
+.acc-panel li:hover {
+  background: rgba(201, 168, 92, 0.12);
+  border-color: rgba(232, 210, 154, 0.4);
 }
 .acc-panel li svg {
-  margin-top: 5px;
   flex-shrink: 0;
-  color: var(--gold-deep);
+  box-sizing: content-box;
+  padding: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy-950);
+}
+.acc-foot {
+  padding: 16px 28px 26px 32px;
+}
+.acc-foot a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  border-bottom: 1px solid rgba(232, 210, 154, 0.5);
+  padding-bottom: 2px;
+  transition: gap 0.3s var(--ease), color 0.2s;
+}
+.acc-foot a:hover {
+  gap: 12px;
+  color: #fff;
 }
 
 .rights {
@@ -3671,15 +3772,29 @@ main.pad-top {
     grid-template-columns: 1fr;
     gap: 10px;
   }
+  .acc {
+    border-radius: 20px;
+  }
   .acc-head {
-    padding: 18px;
+    padding: 18px 16px 18px 20px;
     gap: 14px;
   }
   .acc-head .bicon {
     display: none;
   }
+  .acc-toggle {
+    width: 38px;
+    height: 38px;
+  }
   .acc-panel ul {
-    padding: 4px 20px 24px;
+    grid-template-columns: 1fr;
+    padding: 2px 16px 6px 20px;
+  }
+  .acc-panel li {
+    padding: 12px 14px;
+  }
+  .acc-foot {
+    padding: 14px 16px 22px 20px;
   }
   .cta-card {
     grid-template-columns: 1fr;

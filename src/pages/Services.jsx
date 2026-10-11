@@ -32,20 +32,24 @@ export default function Services() {
                     </small>
                     <strong>{item.t}</strong>
                   </span>
-                  <span className="acc-toggle">
-                    <Icon name="chevronDown" size={20} stroke={1.8} />
-                  </span>
+                  <span className="acc-toggle" aria-hidden="true" />
                 </button>
                 <div className="acc-panel">
                   <div>
                     <ul>
-                      {item.points.map((p) => (
-                        <li key={p}>
-                          <Icon name="check" size={16} stroke={2.2} />
+                      {item.points.map((p, j) => (
+                        <li key={p} style={{ '--i': j }}>
+                          <Icon name="check" size={14} stroke={2.6} />
                           {p}
                         </li>
                       ))}
                     </ul>
+                    <div className="acc-foot">
+                      <Link to="/aloqa">
+                        {t.common.consult}
+                        <Icon name="arrow" size={16} />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </Reveal>
