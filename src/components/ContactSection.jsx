@@ -53,7 +53,7 @@ export default function ContactSection() {
 
       <div className="wrap contact-grid">
         <Reveal className="info-card">
-          <div className="kicker kicker-line">{t.contact.details}</div>
+          <div className="kicker">{t.contact.details}</div>
           <ul>
             <li>
               <span className="ii">
