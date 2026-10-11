@@ -109,22 +109,6 @@ export default function Services() {
           </div>
         </div>
       </section>
-
-      <section className="final compact">
-        <div className="final-glow" aria-hidden="true" />
-        <div className="wrap final-inner">
-          <Reveal>
-            <h2>{t.services.ctaTitle}</h2>
-            <p className="final-text">{t.services.ctaText}</p>
-            <div className="hero-actions center">
-              <Link className="btn btn-gold btn-lg" to={{ hash: 'aloqa' }}>
-                {t.common.consult}
-                <Icon name="arrow" size={18} />
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </>
   )
 }
