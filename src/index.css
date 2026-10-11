@@ -3245,8 +3245,30 @@ main.pad-top {
   overflow: hidden;
   padding-top: clamp(60px, 8vw, 100px);
   color: rgba(233, 237, 244, 0.75);
-  background: var(--navy-950);
+  background: radial-gradient(700px 360px at 8% 0, rgba(201, 168, 92, 0.12), transparent 65%),
+    radial-gradient(600px 320px at 100% 100%, rgba(29, 67, 120, 0.35), transparent 70%),
+    linear-gradient(180deg, var(--navy-900), var(--navy-950) 55%);
   font-size: 0.95rem;
+}
+/* thin gold line with a diamond on top of the footer */
+.footer-rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 92, 0.7) 20%, rgba(232, 210, 154, 0.9) 50%, rgba(201, 168, 92, 0.7) 80%, transparent);
+}
+.footer-rule span {
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  width: 11px;
+  height: 11px;
+  translate: -50% 0;
+  rotate: 45deg;
+  background: var(--navy-900);
+  border: 1px solid var(--gold);
 }
 .footer-mark {
   position: absolute;
@@ -3271,20 +3293,56 @@ main.pad-top {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr 1.2fr;
   gap: clamp(32px, 5vw, 72px);
-  padding-bottom: 44px;
+  padding-bottom: 48px;
 }
 .footer h4 {
-  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
   font-family: var(--sans);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-light);
+}
+.footer h4::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201, 168, 92, 0.4), transparent);
 }
 .footer ul {
   display: grid;
   gap: 10px;
+}
+.footer-nav {
+  gap: 4px !important;
+}
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 6px 0;
+  font-weight: 500;
+  color: rgba(233, 237, 244, 0.82);
+  transition:
+    color 0.25s,
+    gap 0.3s var(--ease);
+}
+.footer-nav a::before {
+  content: '';
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s var(--ease);
+}
+.footer-nav a:hover {
+  gap: 10px;
+}
+.footer-nav a:hover::before {
+  width: 18px;
 }
 .footer a {
   transition: color 0.2s;
@@ -3309,45 +3367,91 @@ main.pad-top {
   gap: 10px;
 }
 .socials a {
-  padding: 8px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
   border-radius: 999px;
   border: 1px solid var(--line-light);
+  background: rgba(255, 255, 255, 0.03);
   font-size: 0.82rem;
   font-weight: 700;
+  color: #fff;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    color 0.25s,
+    transform 0.3s var(--ease);
+}
+.socials a svg {
+  color: var(--gold-light);
+  transition: color 0.25s;
 }
 .socials a:hover {
   background: var(--gold);
   border-color: var(--gold);
   color: var(--navy-950);
+  transform: translateY(-2px);
+}
+.socials a:hover svg {
+  color: var(--navy-950);
+}
+.footer-contact {
+  gap: 16px !important;
 }
 .footer-contact li {
   display: flex;
   gap: 14px;
   align-items: flex-start;
 }
-.footer-contact svg {
-  margin-top: 5px;
-  flex-shrink: 0;
-  color: var(--gold);
-}
-.footer-contact span {
+.footer-contact .fi {
   display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(201, 168, 92, 0.1);
+  border: 1px solid rgba(201, 168, 92, 0.3);
+  color: var(--gold-light);
+}
+.footer-contact li > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding-top: 1px;
+  overflow-wrap: anywhere;
+}
+.footer-contact small {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(233, 237, 244, 0.45);
+}
+.footer-contact a,
+.footer-contact li > div > span {
+  font-weight: 600;
+  color: #fff;
 }
 .footer-legal {
-  padding: 28px 0;
-  border-top: 1px solid var(--line-light);
+  margin: 0;
+  padding: 18px 22px;
+  border-radius: 18px;
+  border: 1px solid var(--line-light);
+  background: rgba(255, 255, 255, 0.025);
   font-size: 0.8rem;
   line-height: 1.7;
-  color: rgba(233, 237, 244, 0.5);
+  color: rgba(233, 237, 244, 0.55);
 }
 .footer-bottom {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
-  padding: 0 0 clamp(70px, 10vw, 150px);
+  padding: 26px 0 clamp(70px, 10vw, 150px);
   font-size: 0.82rem;
-  color: rgba(233, 237, 244, 0.55);
+  color: rgba(233, 237, 244, 0.6);
 }
 .footer-links {
   display: flex;
