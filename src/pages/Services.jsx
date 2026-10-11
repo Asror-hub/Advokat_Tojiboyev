@@ -95,7 +95,7 @@ export default function Services() {
               <Reveal
                 key={r}
                 delay={(i % 3) * 90}
-                className={`bcard ${i === 1 || i === 4 ? 'dark' : ''}`}
+                className="bcard"
               >
                 <span className="bcard-num" aria-hidden="true">
                   {String(i + 1).padStart(2, '0')}
