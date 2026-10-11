@@ -570,7 +570,7 @@ main.pad-top {
   display: flex;
   gap: 2px;
   justify-self: end;
-  margin-right: clamp(0px, 1.4vw, 24px);
+  margin-right: clamp(0px, 3.4vw, 56px);
   padding: 5px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
