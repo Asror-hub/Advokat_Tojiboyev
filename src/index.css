@@ -2381,31 +2381,19 @@ main.pad-top {
   background: rgba(201, 168, 92, 0.14);
   border-color: rgba(232, 210, 154, 0.45);
 }
-/* plus that turns into a minus */
+/* chevron that flips when the card opens */
 .acc-toggle {
-  position: relative;
+  display: grid;
+  place-items: center;
   flex-shrink: 0;
   width: 44px;
   height: 44px;
   border-radius: 50%;
   border: 1px solid var(--line);
-  transition: background 0.3s, border-color 0.3s, transform 0.5s var(--ease);
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
 }
-.acc-toggle::before,
-.acc-toggle::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 16px;
-  height: 2px;
-  margin: -1px 0 0 -8px;
-  border-radius: 2px;
-  background: currentColor;
-  transition: transform 0.4s var(--ease), background 0.3s;
-}
-.acc-toggle::after {
-  transform: rotate(90deg);
+.acc-toggle svg {
+  transition: transform 0.4s var(--ease);
 }
 .acc-head:hover .acc-toggle {
   border-color: var(--gold);
@@ -2414,10 +2402,9 @@ main.pad-top {
   background: var(--gold);
   border-color: var(--gold);
   color: var(--navy-950);
-  transform: rotate(180deg);
 }
-.acc.open .acc-toggle::after {
-  transform: rotate(0deg);
+.acc.open .acc-toggle svg {
+  transform: rotate(180deg);
 }
 .acc-panel {
   display: grid;

@@ -32,7 +32,9 @@ export default function Services() {
                     </small>
                     <strong>{item.t}</strong>
                   </span>
-                  <span className="acc-toggle" aria-hidden="true" />
+                  <span className="acc-toggle" aria-hidden="true">
+                    <Icon name="chevronDown" size={20} stroke={1.8} />
+                  </span>
                 </button>
                 <div className="acc-panel">
                   <div>
