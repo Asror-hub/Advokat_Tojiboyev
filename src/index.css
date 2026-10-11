@@ -2137,6 +2137,20 @@ main.pad-top {
   color: var(--gold-light);
 }
 
+/* Contact block shown above the footer on every page */
+.contact-sec {
+  scroll-margin-top: 28px;
+}
+.contact-sec .services-head {
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+.contact-sec .reply-note {
+  margin-top: 20px;
+  border-color: rgba(168, 135, 63, 0.4);
+  color: var(--gold-deep);
+  background: rgba(201, 168, 92, 0.08);
+}
+
 /* ==========================================================================
    About
    ========================================================================== */

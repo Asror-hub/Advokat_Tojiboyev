@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
+import ContactSection from './ContactSection'
 import Icon from './Icon'
 import { SITE } from '../data/site'
 import { useLang } from '../context/LanguageContext'
@@ -12,7 +13,6 @@ const DARK_HERO = [
   '/himoya-ishlari',
   '/haqida',
   '/xizmatlar',
-  '/aloqa',
   '/maxfiylik',
   '/foydalanish-shartlari',
 ]
@@ -26,10 +26,19 @@ export default function Layout() {
   const path = location.pathname.replace(/\/$/, '') || '/'
   const dark = DARK_HERO.includes(path)
 
+  // New page -> top. A link to #aloqa -> scroll to the contact block above the footer.
   useEffect(() => {
-    window.scrollTo(0, 0)
     setWidgetOpen(false)
-  }, [location.pathname])
+    if (location.hash) {
+      const id = decodeURIComponent(location.hash.slice(1))
+      // wait a tick so the new page has rendered and its height is known
+      const timer = setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 60)
+      return () => clearTimeout(timer)
+    }
+    window.scrollTo(0, 0)
+  }, [location.pathname, location.hash, location.key])
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 700)
@@ -46,6 +55,7 @@ export default function Layout() {
       <main id="main" className={dark ? '' : 'pad-top'}>
         <Outlet />
       </main>
+      <ContactSection />
       <Footer />
 
       <div className={widgetOpen ? 'widget open' : 'widget'}>
@@ -67,7 +77,7 @@ export default function Layout() {
             </span>
             <Icon name="arrow" size={16} />
           </a>
-          <Link to="/aloqa" onClick={() => setWidgetOpen(false)}>
+          <Link to={{ hash: 'aloqa' }} onClick={() => setWidgetOpen(false)}>
             <span className="wi">
               <Icon name="send" size={18} />
             </span>

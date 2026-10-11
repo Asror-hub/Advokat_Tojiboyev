@@ -69,7 +69,7 @@ export default function About() {
               <p>{t.about.p4}</p>
             </Reveal>
             <Reveal className="hero-actions dark-text">
-              <Link className="btn btn-navy btn-lg" to="/aloqa">
+              <Link className="btn btn-navy btn-lg" to={{ hash: 'aloqa' }}>
                 {t.common.consult}
                 <Icon name="arrow" size={18} />
               </Link>

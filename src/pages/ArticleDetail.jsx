@@ -116,7 +116,7 @@ export default function ArticleDetail() {
             <h3>{t.services.ctaTitle}</h3>
             <p>{t.services.ctaText}</p>
           </div>
-          <Link className="btn btn-gold" to="/aloqa">
+          <Link className="btn btn-gold" to={{ hash: 'aloqa' }}>
             {t.common.consult}
             <Icon name="arrow" size={16} />
           </Link>

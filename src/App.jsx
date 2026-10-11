@@ -10,7 +10,6 @@ import Cases from './pages/Cases'
 import CaseDetail from './pages/CaseDetail'
 import Articles from './pages/Articles'
 import ArticleDetail from './pages/ArticleDetail'
-import Contact from './pages/Contact'
 import { Privacy, Terms } from './pages/Legal'
 import NotFound from './pages/NotFound'
 
@@ -40,7 +39,7 @@ export default function App() {
               <Route path="/sud-ishlari" element={<Navigate to="/himoya-ishlari" replace />} />
               <Route path="/haqida" element={<About />} />
               <Route path="/xizmatlar" element={<Services />} />
-              <Route path="/aloqa" element={<Contact />} />
+              <Route path="/aloqa" element={<Navigate to="/#aloqa" replace />} />
               <Route path="/maxfiylik" element={<Privacy />} />
               <Route path="/foydalanish-shartlari" element={<Terms />} />
               <Route path="*" element={<NotFound />} />

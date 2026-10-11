@@ -41,7 +41,7 @@ export default function Home() {
               <p className="hero-quote">{t.home.quote}</p>
             </Reveal>
             <div className="hero-actions">
-              <Link className="btn btn-gold btn-lg" to="/aloqa">
+              <Link className="btn btn-gold btn-lg" to={{ hash: 'aloqa' }}>
                 {t.common.consult}
                 <Icon name="arrow" size={18} />
               </Link>

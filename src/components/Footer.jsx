@@ -12,7 +12,7 @@ export default function Footer() {
     ['/himoya-ishlari', t.nav.cases],
     ['/maqolalar', t.nav.articles],
     ['/haqida', t.nav.about],
-    ['/aloqa', t.nav.contact],
+    ['#aloqa', t.nav.contact],
   ]
 
   return (
@@ -41,7 +41,7 @@ export default function Footer() {
           <ul>
             {nav.map(([to, label]) => (
               <li key={to}>
-                <Link to={to}>{label}</Link>
+                <Link to={to.startsWith('#') ? { hash: to.slice(1) } : to}>{label}</Link>
               </li>
             ))}
           </ul>

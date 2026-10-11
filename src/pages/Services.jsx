@@ -54,7 +54,7 @@ export default function Services() {
                       ))}
                     </ul>
                     <div className="acc-foot">
-                      <Link to="/aloqa">
+                      <Link to={{ hash: 'aloqa' }}>
                         {t.common.consult}
                         <Icon name="arrow" size={16} />
                       </Link>
@@ -117,7 +117,7 @@ export default function Services() {
             <h2>{t.services.ctaTitle}</h2>
             <p className="final-text">{t.services.ctaText}</p>
             <div className="hero-actions center">
-              <Link className="btn btn-gold btn-lg" to="/aloqa">
+              <Link className="btn btn-gold btn-lg" to={{ hash: 'aloqa' }}>
                 {t.common.consult}
                 <Icon name="arrow" size={18} />
               </Link>

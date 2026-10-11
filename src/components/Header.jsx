@@ -68,7 +68,7 @@ export default function Header({ dark }) {
 
   useEffect(() => {
     setMenuOpen(false)
-  }, [location.pathname])
+  }, [location.pathname, location.hash, location.key])
 
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 24)
@@ -110,7 +110,7 @@ export default function Header({ dark }) {
     ['/himoya-ishlari', t.nav.cases],
     ['/maqolalar', t.nav.articles],
     ['/haqida', t.nav.about],
-    ['/aloqa', t.nav.contact],
+    ['#aloqa', t.nav.contact],
   ]
 
   return (
@@ -148,11 +148,17 @@ export default function Header({ dark }) {
         <Logo />
 
         <nav className="nav" aria-label="Main">
-          {links.map(([to, label]) => (
-            <NavLink key={to} to={to} end={to === '/'}>
-              {label}
-            </NavLink>
-          ))}
+          {links.map(([to, label]) =>
+            to.startsWith('#') ? (
+              <Link key={to} to={{ hash: to.slice(1) }}>
+                {label}
+              </Link>
+            ) : (
+              <NavLink key={to} to={to} end={to === '/'}>
+                {label}
+              </NavLink>
+            ),
+          )}
         </nav>
 
         <div className="header-tools">
@@ -185,7 +191,7 @@ export default function Header({ dark }) {
               ))}
             </div>
           </div>
-          <Link to="/aloqa" className="btn btn-gold btn-sm header-cta">
+          <Link to={{ hash: 'aloqa' }} className="btn btn-gold btn-sm header-cta">
             {t.common.consult}
           </Link>
           <button
@@ -201,12 +207,19 @@ export default function Header({ dark }) {
 
       <div className={menuOpen ? 'mobile-menu open' : 'mobile-menu'}>
         <nav>
-          {links.map(([to, label], i) => (
-            <NavLink key={to} to={to} end={to === '/'} style={{ '--i': i }}>
-              <span>{String(i + 1).padStart(2, '0')}</span>
-              {label}
-            </NavLink>
-          ))}
+          {links.map(([to, label], i) =>
+            to.startsWith('#') ? (
+              <Link key={to} to={{ hash: to.slice(1) }} style={{ '--i': i }}>
+                <span>{String(i + 1).padStart(2, '0')}</span>
+                {label}
+              </Link>
+            ) : (
+              <NavLink key={to} to={to} end={to === '/'} style={{ '--i': i }}>
+                <span>{String(i + 1).padStart(2, '0')}</span>
+                {label}
+              </NavLink>
+            ),
+          )}
         </nav>
         <div className="mobile-langs">
           {langs.map((l) => (
@@ -216,7 +229,7 @@ export default function Header({ dark }) {
           ))}
         </div>
         <div className="mobile-foot">
-          <Link to="/aloqa" className="btn btn-gold">
+          <Link to={{ hash: 'aloqa' }} className="btn btn-gold">
             {t.common.consult}
             <Icon name="arrow" size={16} />
           </Link>
