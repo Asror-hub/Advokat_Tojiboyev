@@ -3,11 +3,18 @@ import { Link } from 'react-router-dom'
 import { useLang } from '../context/LanguageContext'
 import PageHero from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+import Cycle from '../components/Cycle'
 import Icon, { SERVICE_ICONS } from '../components/Icon'
+
+const CYCLE_ICONS = ['search', 'file', 'gavel', 'scale', 'shield', 'unlock']
+// lawyer, silence, charge, case file, complaint, expert examination
+const RIGHT_ICONS = ['users', 'lock', 'file', 'search', 'scale', 'flask']
 
 export default function Services() {
   const { t } = useLang()
   const [open, setOpen] = useState(0)
+  const cycleWords = t.services.cycleTitle.split(' ')
+  const rightsWords = t.services.rightsTitle.split(' ')
 
   return (
     <>
@@ -60,36 +67,42 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="sec sec-dark">
+      <section className="sec sec-paper cycle">
         <div className="wrap">
-          <Reveal className="center-head">
-            <div className="kicker kicker-line">{t.services.kicker}</div>
-            <h2>{t.services.cycleTitle}</h2>
+          <Reveal className="center-head services-head">
+            <h2>
+              {cycleWords.slice(0, -1).join(' ')} <em>{cycleWords[cycleWords.length - 1]}</em>
+            </h2>
+            <span className="orn" aria-hidden="true" />
             <p className="center-lead">{t.services.cycleText}</p>
           </Reveal>
-          <div className="steps six on-dark">
-            {t.home.process.map((step, i) => (
-              <Reveal className="step" key={step.n} delay={i * 110}>
-                <span className="node">{step.n}</span>
-                <h3>{step.t}</h3>
-                <p>{step.d}</p>
-              </Reveal>
-            ))}
-          </div>
+          <Cycle steps={t.home.process} icons={CYCLE_ICONS} />
         </div>
       </section>
 
-      <section className="sec sec-paper">
+      <section className="sec sec-ivory">
         <div className="wrap">
-          <Reveal className="center-head">
-            <div className="kicker kicker-line">{t.services.rightsKicker}</div>
-            <h2>{t.services.rightsTitle}</h2>
+          <Reveal className="center-head services-head">
+            <div className="kicker">{t.services.rightsKicker}</div>
+            <h2>
+              {rightsWords.slice(0, -1).join(' ')} <em>{rightsWords[rightsWords.length - 1]}</em>
+            </h2>
+            <span className="orn" aria-hidden="true" />
             <p className="center-lead">{t.services.rightsLead}</p>
           </Reveal>
-          <div className="rights">
+          <div className="bento rights">
             {t.services.rights.map((r, i) => (
-              <Reveal className="right" key={r} delay={(i % 3) * 80}>
-                <span className="right-n">{String(i + 1).padStart(2, '0')}</span>
+              <Reveal
+                key={r}
+                delay={(i % 3) * 90}
+                className={`bcard ${i === 1 || i === 4 ? 'dark' : ''}`}
+              >
+                <span className="bcard-num" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="bicon">
+                  <Icon name={RIGHT_ICONS[i]} size={26} />
+                </span>
                 <p>{r}</p>
               </Reveal>
             ))}
