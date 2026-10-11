@@ -30,8 +30,8 @@ export function LanguageProvider({ children }) {
       setLang,
       t: translations[lang],
       langs: LANGS,
-      // Converts fixed Latin strings (brand name etc.) when Cyrillic is active.
-      tr: (text) => (lang === 'oz' ? toCyrillic(text) : text),
+      // Converts fixed Latin strings (brand name etc.) for Uzbek Cyrillic and Russian.
+      tr: (text) => (lang === 'oz' || lang === 'ru' ? toCyrillic(text) : text),
     }),
     [lang],
   )
