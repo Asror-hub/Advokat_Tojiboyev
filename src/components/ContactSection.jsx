@@ -39,7 +39,6 @@ export default function ContactSection() {
   return (
     <section className="sec sec-ivory contact-sec" id="aloqa" aria-labelledby="aloqa-title">
       <Reveal className="center-head services-head">
-        <span className="kicker">{t.contact.kicker}</span>
         <h2 id="aloqa-title">
           {words.length > 1 ? words.slice(0, -1).join(' ') + ' ' : ''}
           <em>{words[words.length - 1]}</em>

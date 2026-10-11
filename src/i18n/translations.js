@@ -302,7 +302,7 @@ export const translations = {
     contact: {
       kicker: 'Aloqa',
       title: 'Biz bilan bog‘laning',
-      lead: 'Jinoyat ishi bo‘yicha maslahat yoki himoyachi kerak bo‘lsa, formani to‘ldiring. Tez orada bog‘lanamiz.',
+      lead: 'Jinoyat ishi bo‘yicha maslahat yoki himoyachi kerak bo‘lsa, formani to‘ldiring, bizga qo‘ng‘iroq qiling yoki Telegram va elektron pochta orqali yozing. Tez orada bog‘lanamiz.',
       reply: 'Bir ish kuni ichida javob beramiz.',
       details: 'Aloqa ma’lumotlari',
       name: 'To‘liq ism',
@@ -670,7 +670,7 @@ export const translations = {
     contact: {
       kicker: 'Контакты',
       title: 'Свяжитесь с нами',
-      lead: 'Если нужна консультация или защитник по уголовному делу, заполните форму. Мы свяжемся с вами.',
+      lead: 'Если нужна консультация или защитник по уголовному делу, заполните форму, позвоните нам или напишите в Telegram либо на электронную почту. Мы свяжемся с вами.',
       reply: 'Отвечаем в течение рабочего дня.',
       details: 'Контактные данные',
       name: 'Полное имя',
@@ -1002,7 +1002,7 @@ export const translations = {
     contact: {
       kicker: 'Get in touch',
       title: 'Contact us',
-      lead: 'If you need a consultation or a defense lawyer in a criminal case, fill in the form. We will contact you shortly.',
+      lead: 'If you need a consultation or a defense lawyer in a criminal case, fill in the form, call us, or write to us on Telegram or by email. We will contact you shortly.',
       reply: 'We respond within one working day.',
       details: 'Contact details',
       name: 'Full name',
