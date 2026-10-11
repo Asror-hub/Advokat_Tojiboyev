@@ -1,14 +1,19 @@
 // Cleans the HTML produced by the admin text editor before it is stored (and shown on the
 // public site). Only a short list of tags, attributes and styles survives; everything
 // else (scripts, event handlers, foreign images, odd styles) is removed.
-import fs from 'node:fs'
-import path from 'node:path'
 import sanitizeHtml from 'sanitize-html'
 
 const COLOR = [/^#[0-9a-f]{3,8}$/i, /^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*[\d.]+\s*)?\)$/i]
 const ALIGNS = ['inline', 'left', 'center', 'right']
+const UPLOAD_SRC = /^\/uploads\/([\w-]+\.(?:jpg|png|webp))$/
 
-const options = (uploadDir) => ({
+// File names of the uploaded pictures mentioned in some HTML.
+export function uploadNames(html) {
+  return [...String(html || '').matchAll(/\/uploads\/([\w-]+\.(?:jpg|png|webp))/g)].map((m) => m[1])
+}
+
+// `existing` is the set of picture file names that really are in storage.
+const options = (existing) => ({
   allowedTags: ['p', 'br', 'strong', 'em', 'u', 's', 'h2', 'h3', 'ul', 'ol', 'li', 'blockquote', 'a', 'span', 'img'],
   allowedAttributes: {
     a: ['href', 'target', 'rel'],
@@ -40,14 +45,13 @@ const options = (uploadDir) => ({
   // Pictures must be files that were uploaded through the admin panel.
   exclusiveFilter: (frame) => {
     if (frame.tag !== 'img') return false
-    const src = frame.attribs.src || ''
-    const ok = /^\/uploads\/[\w-]+\.(jpg|png|webp)$/.test(src) && fs.existsSync(path.join(uploadDir, path.basename(src)))
-    return !ok
+    const match = UPLOAD_SRC.exec(frame.attribs.src || '')
+    return !(match && existing.has(match[1]))
   },
 })
 
-export function cleanHtml(html, uploadDir) {
-  const out = sanitizeHtml(String(html || ''), options(uploadDir)).trim()
+export function cleanHtml(html, existing = new Set()) {
+  const out = sanitizeHtml(String(html || ''), options(existing)).trim()
   // Keep blank lines the author typed, but not the empty ones left at the very end.
   return out.replace(/<p([^>]*)><\/p>/g, '<p$1><br /></p>').replace(/(<p[^>]*><br \/><\/p>\s*)+$/, '')
 }

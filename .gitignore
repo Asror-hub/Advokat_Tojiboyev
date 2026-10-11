@@ -3,7 +3,6 @@ logs
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
@@ -12,8 +11,12 @@ dist
 dist-ssr
 *.local
 
-# Admin content, uploads and secrets created at runtime
+# Secrets and local Cloudflare state
 .env
+.dev.vars
+.wrangler
+
+# Content from the old Node server. Only needed once, to import it (npm run import:remote).
 server/data
 server/uploads
 

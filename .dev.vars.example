@@ -1,0 +1,9 @@
+# Local secrets for `npm run dev`. Copy this file to ".dev.vars" and set your own values.
+# Never commit ".dev.vars". On the live site the same two values are Cloudflare secrets
+# (see DEPLOY.md).
+
+# Password for the admin panel (/admin). Use 12+ characters.
+ADMIN_PASSWORD=
+
+# Any long random text. It is used to sign the admin login token.
+ADMIN_SECRET=

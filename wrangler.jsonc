@@ -1,0 +1,19 @@
+{
+  // Cloudflare Worker: serves the website files, the content API (/api) and the uploaded
+  // pictures (/uploads). Articles, cases and pictures are stored in one R2 bucket.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "advokat-eldor",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-03-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    // Unknown pages open the React app (it shows its own "not found" page).
+    "not_found_handling": "single-page-application",
+    // Only these paths run the Worker code. Everything else is served straight from the
+    // built files, which is faster and does not use the Worker request quota.
+    "run_worker_first": ["/api/*", "/uploads/*"]
+  },
+  "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "advokat-eldor" }],
+  "observability": { "enabled": true }
+}

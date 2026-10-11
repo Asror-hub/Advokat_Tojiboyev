@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview",
-    "start": "node server/index.js"
+    "preview": "vite build && vite preview",
+    "deploy": "vite build && wrangler deploy",
+    "import:local": "node scripts/import-content.mjs --local",
+    "import:remote": "node scripts/import-content.mjs --remote"
   },
   "dependencies": {
     "@tiptap/core": "^3.31.4",
@@ -18,17 +20,18 @@
     "@tiptap/pm": "^3.31.4",
     "@tiptap/react": "^3.31.4",
     "@tiptap/starter-kit": "^3.31.4",
-    "express": "^5.3.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.4",
     "sanitize-html": "^2.18.0"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.63.1",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
-    "vite": "^8.3.0"
+    "vite": "^8.3.0",
+    "wrangler": "^4.149.0"
   }
 }
