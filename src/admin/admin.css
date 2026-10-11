@@ -1,0 +1,541 @@
+/* Admin panel (/admin). Reuses the site's colour tokens. */
+.adm {
+  min-height: 100vh;
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+/* ---------- top bar ---------- */
+.adm-top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--navy-950);
+  border-bottom: 1px solid rgba(201, 168, 92, 0.35);
+}
+.adm-top-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: min(100% - 32px, 1180px);
+  height: 68px;
+  margin: 0 auto;
+}
+.adm-brand {
+  font-family: var(--serif);
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+.adm-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.adm-langs {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--line-light);
+}
+.adm-langs button {
+  padding: 5px 13px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.adm-langs button.on {
+  background: var(--gold);
+  color: var(--navy-950);
+}
+
+/* ---------- buttons ---------- */
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.92rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    transform 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+.adm-btn:hover {
+  transform: translateY(-1px);
+}
+.adm-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+.adm-btn.sm {
+  padding: 8px 15px;
+  font-size: 0.82rem;
+}
+.adm-btn.wide {
+  width: 100%;
+}
+.adm-btn.gold {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold) 55%, var(--gold-deep));
+  color: var(--navy-950);
+}
+.adm-btn.ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.adm-btn.ghost:hover {
+  background: #fff;
+  border-color: var(--navy-900);
+}
+.adm-top .adm-btn.ghost {
+  border-color: var(--line-light);
+  color: #fff;
+}
+.adm-top .adm-btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.adm-icon-btn {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--navy-800);
+  transition:
+    background 0.25s,
+    color 0.25s,
+    border-color 0.25s;
+}
+.adm-icon-btn:hover {
+  background: var(--navy-900);
+  color: #fff;
+  border-color: var(--navy-900);
+}
+.adm-icon-btn.danger:hover {
+  background: #b3382c;
+  border-color: #b3382c;
+}
+.adm-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: center;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.adm-link:hover {
+  color: var(--ink);
+}
+
+/* ---------- layout ---------- */
+.adm-wrap {
+  width: min(100% - 32px, 1180px);
+  margin: 0 auto;
+  padding: 34px 0 90px;
+}
+.adm-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.adm-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.adm-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--muted);
+  transition:
+    background 0.25s,
+    color 0.25s;
+}
+.adm-tabs button.on {
+  background: var(--navy-900);
+  color: #fff;
+}
+.adm-tabs b {
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: rgba(201, 168, 92, 0.25);
+  font-size: 0.74rem;
+}
+.adm-tabs.big button {
+  padding: 11px 24px;
+  font-size: 0.95rem;
+}
+
+/* ---------- list ---------- */
+.adm-list {
+  display: grid;
+  gap: 12px;
+}
+.adm-item {
+  display: grid;
+  grid-template-columns: 112px 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 18px 12px 12px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.adm-thumb {
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.adm-item-main h3 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  line-height: 1.2;
+  text-wrap: pretty;
+}
+.adm-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.adm-meta i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.adm-item-actions {
+  display: flex;
+  gap: 8px;
+}
+.adm-empty {
+  padding: 50px 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---------- editor ---------- */
+.adm-editor-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.adm-editor-head h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+}
+.adm-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+.adm-back:hover {
+  color: var(--ink);
+}
+.adm-editor-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 22px;
+  align-items: start;
+}
+.adm-side {
+  display: grid;
+  gap: 18px;
+  position: sticky;
+  top: 90px;
+}
+.adm-card {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.adm-note {
+  margin-top: -6px;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+.adm-field {
+  display: grid;
+  gap: 7px;
+  align-content: start;
+}
+.adm-label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--navy-800);
+}
+.adm-label b {
+  color: #b3382c;
+}
+.adm-hint {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.adm-cyr {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--ivory);
+  border-left: 3px solid var(--gold);
+  font-size: 0.9rem;
+  color: var(--navy-700);
+}
+.adm input[type='text'],
+.adm input[type='password'],
+.adm input[type='date'],
+.adm select,
+.adm textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(16, 27, 45, 0.18);
+  background: var(--paper);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+}
+.adm textarea {
+  resize: vertical;
+}
+.adm textarea.adm-body {
+  line-height: 1.7;
+}
+.adm input:focus,
+.adm select:focus,
+.adm textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(201, 168, 92, 0.22);
+}
+.adm-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.adm-timeline {
+  display: grid;
+  gap: 10px;
+}
+.adm-trow {
+  display: grid;
+  grid-template-columns: 130px 1fr 38px;
+  gap: 10px;
+  align-items: center;
+}
+.adm-timeline .adm-btn {
+  justify-self: start;
+}
+
+/* cover picker */
+.adm-cover-preview {
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.adm-covers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.adm-covers button {
+  aspect-ratio: 1;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  opacity: 0.7;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s;
+}
+.adm-covers button:hover {
+  opacity: 1;
+}
+.adm-covers button.on {
+  border-color: var(--gold);
+  opacity: 1;
+}
+.adm-actions {
+  gap: 10px;
+}
+.adm-error {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(179, 56, 44, 0.1);
+  border: 1px solid rgba(179, 56, 44, 0.35);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #8f2a20;
+}
+
+/* ---------- toast ---------- */
+.adm-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  background: var(--navy-950);
+  border: 1px solid var(--gold);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  translate: -50% 0;
+  box-shadow: var(--shadow-lg);
+  animation: admToast 0.45s var(--ease) both;
+}
+.adm-toast svg {
+  color: var(--gold-light);
+}
+@keyframes admToast {
+  from {
+    opacity: 0;
+    translate: -50% 16px;
+  }
+}
+
+/* ---------- login ---------- */
+.adm-login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 70% 10%, rgba(201, 168, 92, 0.22), transparent 55%),
+    linear-gradient(160deg, var(--navy-800), var(--navy-950));
+}
+.adm-login-card {
+  display: grid;
+  gap: 18px;
+  width: min(100%, 410px);
+  padding: 38px 34px 30px;
+  border-radius: 26px;
+  background: var(--paper);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+.adm-login-card h1 {
+  font-size: 2.1rem;
+}
+.adm-login-card p {
+  margin-top: -8px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.adm-login-card .adm-field {
+  text-align: left;
+}
+.adm-login-card .adm-error {
+  margin: 0;
+}
+.adm-login-icon {
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--navy-900);
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 960px) {
+  .adm-editor-grid {
+    grid-template-columns: 1fr;
+  }
+  .adm-side {
+    position: static;
+  }
+  .adm-row {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 720px) {
+  .adm-top-in {
+    height: auto;
+    padding: 12px 0;
+    flex-wrap: wrap;
+  }
+  .adm-top-actions {
+    flex-wrap: wrap;
+  }
+  .adm-item {
+    grid-template-columns: 84px 1fr;
+    gap: 12px;
+  }
+  .adm-item-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+  .adm-item-main h3 {
+    font-size: 1.12rem;
+  }
+  .adm-trow {
+    grid-template-columns: 100px 1fr 38px;
+  }
+  .adm-card {
+    padding: 18px;
+  }
+}
