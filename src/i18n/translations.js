@@ -300,8 +300,8 @@ export const translations = {
       },
     },
     contact: {
-      kicker: 'Bog‘lanish',
-      title: 'Aloqa',
+      kicker: 'Aloqa',
+      title: 'Biz bilan bog‘laning',
       lead: 'Jinoyat ishi bo‘yicha maslahat yoki himoyachi kerak bo‘lsa, formani to‘ldiring. Tez orada bog‘lanamiz.',
       reply: 'Bir ish kuni ichida javob beramiz.',
       details: 'Aloqa ma’lumotlari',
@@ -668,8 +668,8 @@ export const translations = {
       },
     },
     contact: {
-      kicker: 'Связь',
-      title: 'Контакты',
+      kicker: 'Контакты',
+      title: 'Свяжитесь с нами',
       lead: 'Если нужна консультация или защитник по уголовному делу, заполните форму. Мы свяжемся с вами.',
       reply: 'Отвечаем в течение рабочего дня.',
       details: 'Контактные данные',
@@ -1001,7 +1001,7 @@ export const translations = {
     },
     contact: {
       kicker: 'Get in touch',
-      title: 'Contact',
+      title: 'Contact us',
       lead: 'If you need a consultation or a defense lawyer in a criminal case, fill in the form. We will contact you shortly.',
       reply: 'We respond within one working day.',
       details: 'Contact details',
