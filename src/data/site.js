@@ -5,6 +5,8 @@ export const SITE = {
   name: 'Tojiboyev Eldor',
   fullName: 'Tojiboyev Eldor',
   brand: 'ADVOKAT TOJIBOYEV ELDOR',
+  // Practice name stays in Latin in every language.
+  practice: 'TEN Duayen by Tojiboev’s',
   initials: 'TE',
   domain: 'advokat-eldor.uz',
   email: 'info@advokat-eldor.uz',

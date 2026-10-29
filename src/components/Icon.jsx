@@ -48,7 +48,19 @@ const PATHS = {
   float: 'M4 5h7v7H4zM14 6h6M14 10h6M4 16h16M4 20h12',
 }
 
-export const SERVICE_ICONS = ['search', 'shield', 'scale', 'users', 'file', 'flask', 'lock', 'unlock']
+export const SERVICE_ICONS = [
+  'shield',
+  'building',
+  'users',
+  'file',
+  'gavel',
+  'edit',
+  'search',
+  'scale',
+  'book',
+  'unlock',
+  'globe',
+]
 
 export default function Icon({ name, size = 20, stroke = 1.6, className = '' }) {
   return (

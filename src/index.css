@@ -2118,11 +2118,26 @@ main.pad-top {
 .page-hero .orn::after {
   background: var(--navy-900);
 }
+.page-kicker {
+  margin: 0 auto 14px;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--gold-light);
+}
 .page-lead {
   margin: 20px auto 0;
-  max-width: 620px;
+  max-width: 720px;
   font-size: 1.15rem;
   color: rgba(233, 237, 244, 0.78);
+}
+.page-lead + .page-lead {
+  margin-top: 12px;
+}
+.lead-brand {
+  font-weight: 600;
+  color: var(--gold-light);
 }
 .reply-note {
   display: inline-flex;
@@ -2491,6 +2506,80 @@ main.pad-top {
   gap: 12px;
   color: #fff;
 }
+.acc-intro {
+  padding: 0 32px 12px;
+  color: rgba(233, 237, 244, 0.82);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+.acc-intro:first-child {
+  padding-top: 4px;
+}
+.acc-areas,
+.acc-principles {
+  padding: 10px 32px 8px;
+}
+.acc-areas h3,
+.acc-principles h3 {
+  margin-bottom: 12px;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+.acc-area-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.acc-area {
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.acc-area strong {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  line-height: 1.25;
+  color: #fff;
+}
+.acc-area p {
+  color: rgba(233, 237, 244, 0.78);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+.acc-note {
+  margin: 8px 32px 4px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(201, 168, 92, 0.35);
+  background: rgba(201, 168, 92, 0.1);
+  color: rgba(233, 237, 244, 0.92);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.services-tagline {
+  margin: 44px auto 14px;
+  max-width: 720px;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  line-height: 1.35;
+  color: var(--navy-900);
+}
+.services-note {
+  margin: 0 auto;
+  max-width: 760px;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
 
 /* Rights of the accused: the same cards as the home page services, three in a row */
 .rights {
@@ -2529,6 +2618,9 @@ main.pad-top {
   line-height: 1.3;
   color: var(--navy-900);
   text-wrap: balance;
+}
+.approach {
+  grid-template-columns: repeat(4, 1fr);
 }
 .rights .bcard.dark p {
   color: #fff;
@@ -3920,6 +4012,19 @@ main.pad-top {
   .acc-toggle {
     width: 38px;
     height: 38px;
+  }
+  .acc-intro {
+    padding: 0 16px 10px;
+  }
+  .acc-areas,
+  .acc-principles {
+    padding: 8px 16px 6px;
+  }
+  .acc-area-grid {
+    grid-template-columns: 1fr;
+  }
+  .acc-note {
+    margin: 8px 16px 4px;
   }
   .acc-panel ul {
     grid-template-columns: 1fr;

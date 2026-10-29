@@ -1,4 +1,5 @@
 import { deepCyrillic } from './translit'
+import { servicesEn, servicesRu, servicesUz } from './services'
 
 export const LANGS = [
   { id: 'oz', label: 'Ўзбекча', short: 'ЎЗ' },
@@ -102,7 +103,7 @@ export const translations = {
       ],
       servicesKicker: 'Xizmat yo‘nalishlari',
       servicesTitle: 'Yuridik xizmatlar',
-      servicesLead: 'Jinoyat ishlari bo‘yicha himoyaning barcha bosqichlarida — tergovdan sud hukmigacha — sizning yoningizda.',
+      servicesLead: 'Jinoyat, ma’muriy, fuqarolik va iqtisodiy ishlar bo‘yicha huquqiy yordam, sudlarda himoya va vakillik, hujjatlar va nizolarni muqobil hal etish.',
       quote: 'Murakkab jinoyat ishlari bo‘yicha professional himoya.',
       articlesKicker: 'So‘nggi tahlillar',
       articlesTitle: 'Maqolalar arxivi',
@@ -174,111 +175,7 @@ export const translations = {
         { y: '2026', t: 'Professional e’tirof', d: 'Ochiq sudlov va advokat ovozi masalasidagi tahlillar' },
       ],
     },
-    services: {
-      kicker: 'Amaliyot yo‘nalishlari',
-      title: 'Yuridik xizmatlar',
-      lead: 'To‘liq sikl huquqiy himoya — birinchi qo‘ng‘iroqdan hukm ijrosigacha.',
-      items: [
-        {
-          n: '01',
-          k: 'Tergovgacha',
-          t: 'Tergovga qadar yuridik yordam',
-          points: [
-            'Jinoyat xabari bo‘yicha tushuntirishlarda ishtirok',
-            'Chaqiruv va so‘rovlarni huquqiy baholash',
-            'Noqonuniy harakatlarning oldini olish',
-          ],
-        },
-        {
-          n: '02',
-          k: 'Tergov',
-          t: 'Tergov bosqichida himoya',
-          points: [
-            'Gumon qilinuvchi va ayblanuvchini himoya',
-            'So‘roqlarda ishtirok',
-            'Dalillarni yig‘ish va tahlil',
-            'Ekspert tadbirlarida ishtirok',
-          ],
-        },
-        {
-          n: '03',
-          k: 'Sud',
-          t: 'Barcha instansiyalarda himoya',
-          points: [
-            'Birinchi instansiya sudi',
-            'Apellyatsiya, kassatsiya, nazorat shikoyatlari',
-            'Himoya nutqi va sud strategiyasi',
-          ],
-        },
-        {
-          n: '04',
-          k: 'Jabrlangan',
-          t: 'Jabrlangan manfaatlarini himoya',
-          points: [
-            'Zararni undirish',
-            'Fuqaroviy da’volar',
-            'Protsessda vakillik',
-          ],
-        },
-        {
-          n: '05',
-          k: 'Hujjatlar',
-          t: 'Protsessual hujjatlar',
-          points: [
-            'Shikoyat va iltimosnomalar',
-            'Apellyatsiya va kassatsiya shikoyatlari',
-            'Huquqiy pozitsiya va xulosalar',
-          ],
-        },
-        {
-          n: '06',
-          k: 'Dalillar',
-          t: 'Ekspert dalil tahlili',
-          points: [
-            'Ekspert xulosalarini tahlil',
-            'Qo‘shimcha yoki takroriy ekspertiza',
-            'Dalilning qabul qilinishini baholash',
-          ],
-        },
-        {
-          n: '07',
-          k: 'Ehtiyot chora',
-          t: 'Ehtiyot choralariga e’tiroz',
-          points: [
-            'Qamoq, garov, uy qamog‘i',
-            'Chorani o‘zgartirish iltimosnomalari',
-            'Sud oldida vakillik',
-          ],
-        },
-        {
-          n: '08',
-          k: 'Hukmdan keyin',
-          t: 'Hukm ijrosi bosqichida yordam',
-          points: [
-            'Jazoni yengillashtirish',
-            'Shartli muddatidan oldin ozod qilish',
-            'Jazo turini o‘zgartirish, reabilitatsiya',
-          ],
-        },
-      ],
-      cycleTitle: 'To‘liq himoya sikli',
-      cycleText:
-        'Jinoyat xabarini tekshirishdan barcha sud instansiyalari va hukm ijrosigacha. Bitta strategiya. Uzluksiz yordam. Hisobdor natija.',
-      rightsKicker: 'Huquqlaringizni biling',
-      rightsTitle: 'Jinoyat protsessida ayblanuvchi huquqlari',
-      rightsLead:
-        'Huquqni bilish — samarali himoyaning birinchi qadami. Bu huquqlarning hech biri qonuniy ravishda buzilishi mumkin emas.',
-      rights: [
-        'Ushlangan paytdan himoyachi huquqi',
-        'Sukut saqlash huquqi',
-        'Ayblov mohiyatini bilish huquqi',
-        'Ish materiallari bilan tanishish',
-        'Tergovchi harakatlaridan shikoyat',
-        'Mustaqil ekspertiza huquqi',
-      ],
-      ctaTitle: 'Huquqiy savolingiz bormi?',
-      ctaText: 'Dastlabki maslahat — aniq, qisqa va amaliy.',
-    },
+    services: servicesUz,
     cases: {
       kicker: 'Amaliyot',
       title: 'Himoya ishlari',
@@ -302,7 +199,7 @@ export const translations = {
     contact: {
       kicker: 'Aloqa',
       title: 'Biz bilan bog‘laning',
-      lead: 'Jinoyat ishi bo‘yicha maslahat yoki himoyachi kerak bo‘lsa, formani to‘ldiring yoki bizga qo‘ng‘iroq qiling. Shuningdek, Telegram va elektron pochta orqali murojaat qilishingiz mumkin.',
+      lead: 'Huquqiy masalangiz bo‘yicha maslahat olish, advokatlik xizmatlariga murojaat qilish yoki mediatsiya jarayoni haqida ma’lumot olish uchun biz bilan bog‘laning. Shuningdek, qo‘ng‘iroq qilishingiz, Telegram yoki elektron pochta orqali yozishingiz mumkin.',
       reply: 'Bir ish kuni ichida javob beramiz.',
       details: 'Aloqa ma’lumotlari',
       name: 'To‘liq ism',
@@ -470,7 +367,7 @@ export const translations = {
       ],
       servicesKicker: 'Направления',
       servicesTitle: 'Юридические услуги',
-      servicesLead: 'На всех этапах защиты по уголовным делам — от следствия до приговора суда — рядом с вами.',
+      servicesLead: 'Правовая помощь по уголовным, административным, гражданским и экономическим делам, защита и представительство в судах, документы и альтернативное урегулирование споров.',
       quote: 'Профессиональная защита по сложным уголовным делам.',
       articlesKicker: 'Последние разборы',
       articlesTitle: 'Архив статей',
@@ -542,111 +439,7 @@ export const translations = {
         { y: '2026', t: 'Профессиональное признание', d: 'Разборы вопросов гласности суда и голоса адвоката' },
       ],
     },
-    services: {
-      kicker: 'Практика',
-      title: 'Юридические услуги',
-      lead: 'Защита полного цикла — от первого звонка до исполнения приговора.',
-      items: [
-        {
-          n: '01',
-          k: 'До следствия',
-          t: 'Помощь на доследственной проверке',
-          points: [
-            'Участие в даче объяснений',
-            'Оценка вызовов и запросов',
-            'Предотвращение незаконных действий',
-          ],
-        },
-        {
-          n: '02',
-          k: 'Следствие',
-          t: 'Защита на следствии',
-          points: [
-            'Защита подозреваемых и обвиняемых',
-            'Участие в допросах',
-            'Сбор и анализ доказательств',
-            'Участие в экспертных действиях',
-          ],
-        },
-        {
-          n: '03',
-          k: 'Суд',
-          t: 'Защита во всех инстанциях',
-          points: [
-            'Суд первой инстанции',
-            'Апелляция, кассация, надзор',
-            'Защитительная речь и стратегия',
-          ],
-        },
-        {
-          n: '04',
-          k: 'Потерпевший',
-          t: 'Интересы потерпевшего',
-          points: [
-            'Взыскание ущерба',
-            'Гражданские иски',
-            'Представительство в процессе',
-          ],
-        },
-        {
-          n: '05',
-          k: 'Документы',
-          t: 'Процессуальные документы',
-          points: [
-            'Жалобы и ходатайства',
-            'Апелляционные и кассационные жалобы',
-            'Правовые позиции и заключения',
-          ],
-        },
-        {
-          n: '06',
-          k: 'Доказательства',
-          t: 'Анализ экспертных доказательств',
-          points: [
-            'Разбор заключений экспертов',
-            'Дополнительная или повторная экспертиза',
-            'Оценка допустимости доказательств',
-          ],
-        },
-        {
-          n: '07',
-          k: 'Мера пресечения',
-          t: 'Оспаривание мер пресечения',
-          points: [
-            'Заключение, залог, домашний арест',
-            'Ходатайства об изменении меры',
-            'Представительство в суде',
-          ],
-        },
-        {
-          n: '08',
-          k: 'После приговора',
-          t: 'Помощь на стадии исполнения',
-          points: [
-            'Смягчение наказания',
-            'Условно-досрочное освобождение',
-            'Изменение вида наказания, реабилитация',
-          ],
-        },
-      ],
-      cycleTitle: 'Защита полного цикла',
-      cycleText:
-        'От проверки сообщения о преступлении через все инстанции до исполнения приговора. Одна стратегия. Непрерывная поддержка. Ответственный результат.',
-      rightsKicker: 'Знайте свои права',
-      rightsTitle: 'Права обвиняемого в уголовном процессе',
-      rightsLead:
-        'Знание прав — первый шаг к эффективной защите. Ни одно из этих прав не может быть законно нарушено.',
-      rights: [
-        'Право на защитника с момента задержания',
-        'Право хранить молчание',
-        'Право знать сущность обвинения',
-        'Право знакомиться с материалами',
-        'Право обжаловать действия следователя',
-        'Право на независимую экспертизу',
-      ],
-      ctaTitle: 'Есть правовой вопрос?',
-      ctaText: 'Первичная консультация — ясно, кратко, по делу.',
-    },
+    services: servicesRu,
     cases: {
       kicker: 'Практика',
       title: 'Дела защиты',
@@ -670,7 +463,7 @@ export const translations = {
     contact: {
       kicker: 'Контакты',
       title: 'Свяжитесь с нами',
-      lead: 'Если нужна консультация или защитник по уголовному делу, заполните форму или позвоните нам. Также вы можете обратиться к нам через Telegram или по электронной почте.',
+      lead: 'Свяжитесь с нами, чтобы получить консультацию по правовому вопросу, обратиться за адвокатскими услугами или узнать о медиации. Вы также можете позвонить нам или написать в Telegram либо по электронной почте.',
       reply: 'Отвечаем в течение рабочего дня.',
       details: 'Контактные данные',
       name: 'Полное имя',
@@ -802,7 +595,7 @@ export const translations = {
       ],
       servicesKicker: 'Practice areas',
       servicesTitle: 'Legal services',
-      servicesLead: 'At every stage of criminal defense — from investigation to the court’s verdict — we stand beside you.',
+      servicesLead: 'Legal assistance in criminal, administrative, civil and economic matters, defense and representation in court, documents, and alternative dispute resolution.',
       quote: 'Professional defense in complex criminal cases.',
       articlesKicker: 'Latest analysis',
       articlesTitle: 'Article archive',
@@ -874,111 +667,7 @@ export const translations = {
         { y: '2026', t: 'Professional standing', d: 'Analysis on open justice and the voice of counsel' },
       ],
     },
-    services: {
-      kicker: 'Areas of practice',
-      title: 'Legal services',
-      lead: 'Full-cycle legal defense — from the first call to enforcement of the verdict.',
-      items: [
-        {
-          n: '01',
-          k: 'Pre-investigation',
-          t: 'Assistance before a case is opened',
-          points: [
-            'Participation when giving explanations',
-            'Legal assessment of summons and inquiries',
-            'Prevention of unlawful investigative steps',
-          ],
-        },
-        {
-          n: '02',
-          k: 'Investigation',
-          t: 'Defense during investigation',
-          points: [
-            'Defense of suspects and accused persons',
-            'Attendance at interrogations',
-            'Collection and analysis of evidence',
-            'Participation in expert procedures',
-          ],
-        },
-        {
-          n: '03',
-          k: 'Court',
-          t: 'Defense in all instances',
-          points: [
-            'First-instance trial',
-            'Appeal, cassation and supervisory complaints',
-            'Closing speech and litigation strategy',
-          ],
-        },
-        {
-          n: '04',
-          k: 'Victims',
-          t: 'Representation of victims',
-          points: [
-            'Recovery of damage',
-            'Civil claims in the criminal case',
-            'Active representation in court',
-          ],
-        },
-        {
-          n: '05',
-          k: 'Documents',
-          t: 'Procedural drafting',
-          points: [
-            'Complaints and motions',
-            'Appeal and cassation filings',
-            'Legal positions and opinions',
-          ],
-        },
-        {
-          n: '06',
-          k: 'Evidence',
-          t: 'Expert evidence analysis',
-          points: [
-            'Review of expert opinions',
-            'Applications for additional or repeat expertise',
-            'Assessment of admissibility',
-          ],
-        },
-        {
-          n: '07',
-          k: 'Detention',
-          t: 'Challenging measures of restraint',
-          points: [
-            'Custody, bail and house arrest',
-            'Motions to vary the measure',
-            'Hearings before the court',
-          ],
-        },
-        {
-          n: '08',
-          k: 'After verdict',
-          t: 'Assistance at enforcement',
-          points: [
-            'Sentence reduction',
-            'Conditional early release',
-            'Change of penalty type, rehabilitation',
-          ],
-        },
-      ],
-      cycleTitle: 'Full-cycle defense',
-      cycleText:
-        'From the first examination of a report through every court instance to enforcement. One strategy. Uninterrupted support. Accountable results.',
-      rightsKicker: 'Know your rights',
-      rightsTitle: 'Rights of the accused in criminal proceedings',
-      rightsLead:
-        'Knowing your rights is the first step toward effective defense. None of these rights may lawfully be denied.',
-      rights: [
-        'Counsel from the moment of detention',
-        'The right to remain silent',
-        'The right to know the charge',
-        'The right to inspect the case file',
-        'The right to appeal the investigator’s acts',
-        'The right to an independent expert',
-      ],
-      ctaTitle: 'Do you have a legal problem?',
-      ctaText: 'An initial consultation — clear, concise, and practical.',
-    },
+    services: servicesEn,
     cases: {
       kicker: 'Practice',
       title: 'Defense cases',
@@ -1002,7 +691,7 @@ export const translations = {
     contact: {
       kicker: 'Get in touch',
       title: 'Contact us',
-      lead: 'If you need a consultation or a defense lawyer in a criminal case, fill in the form or call us. You can also reach us via Telegram or by email.',
+      lead: 'Contact us for advice on a legal matter, to request advocacy services, or to learn about mediation. You can also call us or write via Telegram or email.',
       reply: 'We respond within one working day.',
       details: 'Contact details',
       name: 'Full name',
