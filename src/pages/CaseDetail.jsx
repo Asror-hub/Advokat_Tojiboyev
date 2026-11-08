@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { SITE, pick } from '../data/site'
+import { pick } from '../data/site'
 import Body from '../components/Body'
 import { useContent } from '../context/ContentContext'
 import { useLang, formatDate } from '../context/LanguageContext'
@@ -68,20 +68,6 @@ export default function CaseDetail() {
           <Body body={pick(item.body, lang)} />
         </div>
 
-        <aside className="cta-card">
-          <div>
-            <h3>{t.services.ctaTitle}</h3>
-            <p>{t.services.ctaText}</p>
-          </div>
-          <Link className="btn btn-gold" to={{ hash: 'aloqa' }}>
-            {t.common.consult}
-            <Icon name="arrow" size={16} />
-          </Link>
-          <a className="cta-phone" href={SITE.phones[0].href}>
-            <Icon name="phone" size={16} />
-            {SITE.phones[0].display}
-          </a>
-        </aside>
 
         <h2 className="related-title">{t.common.allCases}</h2>
         <div className="grid-2">

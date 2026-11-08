@@ -5,10 +5,12 @@ import { Logo } from './Header'
 import Icon from './Icon'
 
 export default function Footer() {
-  const { t, lang, tr } = useLang()
+  const { t, lang } = useLang()
   const nav = [
     ['/', t.nav.home],
     ['/xizmatlar', t.nav.services],
+    ['/mediatsiya', t.nav.mediation],
+    ['/jamoa', t.nav.team],
     ['/himoya-ishlari', t.nav.cases],
     ['/maqolalar', t.nav.articles],
     ['/haqida', t.nav.about],
@@ -24,7 +26,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-mark" aria-hidden="true">
-        {tr('TOJIBOYEV ELDOR')}
+        TEN Duayen
       </div>
       <div className="footer-rule" aria-hidden="true">
         <span />

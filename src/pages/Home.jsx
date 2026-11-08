@@ -1,75 +1,69 @@
 import { Link } from 'react-router-dom'
-import { SITE, pick } from '../data/site'
 import { useContent } from '../context/ContentContext'
-import { useLang, formatDate } from '../context/LanguageContext'
-import { Reveal, CountUp } from '../components/Reveal'
-import { Portrait } from '../components/Cover'
-import { ArticleCard } from '../components/Cards'
+import { useLang } from '../context/LanguageContext'
+import { Reveal } from '../components/Reveal'
+import { HeroScene } from '../components/Cover'
+import { ArticleCard, CaseCard } from '../components/Cards'
+import Certificates from '../components/Certificates'
+import Testimonials from '../components/Testimonials'
+import TeamCarousel from '../components/TeamCarousel'
 import Cycle from '../components/Cycle'
 import Icon, { SERVICE_ICONS } from '../components/Icon'
 
 const CYCLE_ICONS = ['search', 'file', 'gavel', 'scale', 'shield', 'unlock']
 
 export default function Home() {
-  const { t, lang } = useLang()
+  const { t } = useLang()
   const { articles, cases } = useContent()
   const latest = articles.slice(0, 3)
   const services = t.services.items.slice(0, 4)
-  const feature = cases[0]
+  const wins = cases.filter((c) => c.status === 'successful').slice(0, 3)
   const ribbon = [...t.home.ribbon, ...t.home.ribbon, ...t.home.ribbon, ...t.home.ribbon]
   const servicesWords = t.home.servicesTitle.split(' ')
   const processWords = t.home.processTitle.split(' ')
   const articlesWords = t.home.articlesTitle.split(' ')
-  const [first, ...rest] = t.home.title.split(' ')
-  const statLabel = { years: t.home.yearsLabel, cases: t.home.casesLabel, success: t.home.successLabel }
+  const teamWords = t.home.teamTitle.split(' ')
+  const winsWords = t.home.winsTitle.split(' ')
 
   return (
     <>
       {/* HERO */}
-      <section className="hero">
-        <div className="wrap hero-grid">
-          <div className="hero-copy">
-            <Reveal delay={80}>
-              <p className="hero-role">{t.home.role}</p>
+      <section className="hero-lux">
+        <div className="hero-lux-bg" aria-hidden="true">
+          <HeroScene />
+        </div>
+        <div className="wrap hero-lux-inner">
+          <div className="hero-lux-copy">
+            <Reveal delay={60}>
+              <p className="hero-lux-kicker">
+                <span>{t.home.kicker}</span>
+                <i />
+              </p>
             </Reveal>
-            <Reveal delay={160}>
-              <h1 className="display">
-                <span>{first}</span> <em>{rest.join(' ')}</em>
+            <Reveal delay={140}>
+              <h1 className="hero-lux-title">
+                <span className="hl-brand">TEN Duayen</span>
+                <span className="hl-by">by Tojiboev’s</span>
               </h1>
             </Reveal>
-            <Reveal delay={240}>
-              <p className="hero-quote">{t.home.quote}</p>
+            <Reveal delay={220}>
+              <p className="hero-lux-tag">{t.footer.tagline}</p>
             </Reveal>
-            <div className="hero-actions">
+            <Reveal delay={300} className="hero-lux-actions">
               <Link className="btn btn-gold btn-lg" to={{ hash: 'aloqa' }}>
                 {t.common.consult}
                 <Icon name="arrow" size={18} />
               </Link>
-              <a className="btn btn-ghost btn-lg" href={SITE.telegram} target="_blank" rel="noreferrer">
-                <Icon name="telegram" size={18} />
-                {t.common.telegram}
-              </a>
-            </div>
+              <Link className="btn btn-lux-outline btn-lg" to="/xizmatlar">
+                {t.common.exploreServices}
+              </Link>
+            </Reveal>
           </div>
-
-          <Reveal className="hero-art" delay={200}>
-            <div className="arch-wrap">
-              <Portrait photo={SITE.photo} />
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="wrap">
-          <div className="hero-stats">
-            {SITE.stats.map((s) => (
-              <div className="stat" key={s.key}>
-                <b>
-                  <CountUp value={s.value} />
-                </b>
-                <span>{statLabel[s.key]}</span>
-              </div>
+          <ul className="hero-lux-words">
+            {t.home.words.map((w) => (
+              <li key={w}>{w}</li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -128,50 +122,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURED RESULT */}
-      {feature && (
-      <section className="sec sec-dark featured">
-        <div className="featured-glow" aria-hidden="true" />
-        <div className="wrap">
-          <Reveal className="center-head services-head">
-            <div className="kicker">{t.home.featuredKicker}</div>
-            <span className="orn" aria-hidden="true" />
-          </Reveal>
-        </div>
-        <div className="wrap featured-grid">
-          <Reveal delay={80} className="feature-head">
-            <div className="feature-meta">
-              <span>{pick(feature.category, lang)}</span>
-              <i aria-hidden="true" />
-              <span>{formatDate(feature.date, lang)}</span>
-            </div>
-            <h2>{pick(feature.title, lang)}</h2>
-          </Reveal>
-          <Reveal delay={140} className="featured-card">
-            <p>{pick(feature.excerpt, lang)}</p>
-            <ol className="mini-timeline">
-              {feature.timeline.map((step, i) => (
-                <li key={`${step.date}-${i}`}>
-                  <b>{step.date}</b>
-                  <span>{pick(step, lang)}</span>
-                </li>
-              ))}
-            </ol>
-            <Link className="btn btn-ghost" to={`/himoya-ishlari/${feature.slug}`}>
-              {t.home.viewCase}
-              <Icon name="arrow" size={16} />
-            </Link>
-          </Reveal>
-        </div>
-        <div className="wrap">
-          <Reveal className="sec-more">
-            <Link className="btn btn-gold btn-lg" to="/himoya-ishlari">
-              {t.common.viewAllCases}
-              <Icon name="arrow" size={18} />
-            </Link>
-          </Reveal>
-        </div>
-      </section>
+      {/* CERTIFICATES */}
+      <Certificates />
+
+      {/* TESTIMONIALS */}
+      <Testimonials />
+
+      {/* CASES WE WON */}
+      {wins.length > 0 && (
+        <section className="sec sec-paper win-sec">
+          <div className="wrap">
+            <Reveal className="center-head services-head">
+              <h2>
+                {winsWords.slice(0, -1).join(' ')} <em>{winsWords[winsWords.length - 1]}</em>
+              </h2>
+              <span className="orn" aria-hidden="true" />
+              <p className="center-lead">{t.home.winsLead}</p>
+            </Reveal>
+
+            <Reveal>
+              <CaseCard c={wins[0]} feature />
+            </Reveal>
+            {wins.length > 1 && (
+              <div className="grid-2">
+                {wins.slice(1).map((c, i) => (
+                  <Reveal key={c.slug} delay={(i % 2) * 100}>
+                    <CaseCard c={c} />
+                  </Reveal>
+                ))}
+              </div>
+            )}
+
+            <Reveal className="sec-more">
+              <Link className="btn btn-gold btn-lg" to="/himoya-ishlari">
+                {t.common.viewAllCases}
+                <Icon name="arrow" size={18} />
+              </Link>
+            </Reveal>
+          </div>
+        </section>
       )}
 
       {/* PROCESS */}
@@ -188,8 +177,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* TEAM */}
+      <section className="sec tm-light">
+        <div className="wrap">
+          <Reveal className="center-head services-head">
+            <h2>
+              {teamWords.slice(0, -1).join(' ')} <em>{teamWords[teamWords.length - 1]}</em>
+            </h2>
+            <span className="orn" aria-hidden="true" />
+            <p className="center-lead">{t.home.teamLead}</p>
+          </Reveal>
+        </div>
+        <TeamCarousel members={t.team.members} />
+      </section>
+
       {/* ARTICLES */}
-      <section className="sec sec-ivory">
+      <section className="sec sec-ivory art-white">
         <div className="wrap">
           <Reveal className="center-head services-head">
             <h2>

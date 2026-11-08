@@ -1,64 +1,47 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { SITE, pick } from '../data/site'
+import { SITE } from '../data/site'
 import { useLang } from '../context/LanguageContext'
 import Icon from './Icon'
 import Flag from './Flag'
+import logoImg from '../assets/logo.jpg'
 
 export function Logo({ light = false }) {
-  const { t, tr } = useLang()
   return (
-    <Link to="/" className={`logo ${light ? 'light' : ''}`} aria-label={tr(SITE.brand)}>
-      <svg className="logo-crest" viewBox="0 0 48 56" aria-hidden="true">
-        <defs>
-          <linearGradient id="crest-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#1d4378" />
-            <stop offset="1" stopColor="#08121f" />
-          </linearGradient>
-          <linearGradient id="crest-gold" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#f0dca4" />
-            <stop offset=".55" stopColor="#c9a85c" />
-            <stop offset="1" stopColor="#a8873f" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M24 2.5 43 8.5v18.2c0 12.2-8 21.4-19 26.8C13 48.1 5 38.9 5 26.7V8.5z"
-          fill="url(#crest-fill)"
-          stroke="url(#crest-gold)"
-          strokeWidth="2"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M24 7.2 39 12v14.5c0 9.8-6.200 17.400-15 22-8.800-4.600-15-12.200-15-22V12z"
-          fill="none"
-          stroke="#c9a85c"
-          strokeOpacity=".4"
-          strokeWidth=".9"
-        />
-        <text
-          x="24"
-          y="32.5"
-          textAnchor="middle"
-          fontFamily="Cormorant Garamond, Georgia, serif"
-          fontSize="19"
-          fontWeight="700"
-          letterSpacing="1"
-          fill="url(#crest-gold)"
-        >
-          {tr(SITE.initials)}
-        </text>
-        <path d="M17 38.5h14" stroke="#c9a85c" strokeWidth="1" strokeLinecap="round" strokeOpacity=".7" />
-        <circle cx="24" cy="38.5" r="1.4" fill="#e8d29a" />
-      </svg>
+    <Link to="/" className={`logo ${light ? 'light' : ''}`} aria-label={SITE.practice}>
+      <img className="logo-img" src={logoImg} alt="" width="906" height="954" />
       <span className="logo-text">
-        <small>{t.common.logoTag}</small>
-        <strong>{tr('TOJIBOYEV ELDOR')}</strong>
+        <strong>TEN Duayen</strong>
+        <small>by Tojiboev’s</small>
       </span>
     </Link>
   )
 }
 
-export default function Header({ dark }) {
+function NavItem({ to, label, index, mobile = false }) {
+  const inner = mobile ? (
+    <>
+      <span>{String(index + 1).padStart(2, '0')}</span>
+      {label}
+    </>
+  ) : (
+    label
+  )
+  if (to.startsWith('#')) {
+    return (
+      <Link to={{ pathname: '/', hash: to.slice(1) }} style={mobile ? { '--i': index } : undefined}>
+        {inner}
+      </Link>
+    )
+  }
+  return (
+    <NavLink to={to} end={to === '/'} style={mobile ? { '--i': index } : undefined}>
+      {inner}
+    </NavLink>
+  )
+}
+
+export default function Header({ dark, light = false }) {
   const { t, lang, setLang, langs } = useLang()
   const [langOpen, setLangOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -94,10 +77,12 @@ export default function Header({ dark }) {
 
   const solid = !dark || scrolled
   const compact = scrolled
+  const onLight = light && !scrolled && !menuOpen
   const cls = [
     'header',
     solid && !menuOpen ? 'solid' : '',
-    !solid || menuOpen ? 'on-dark' : '',
+    (!solid || menuOpen) && !onLight ? 'on-dark' : '',
+    onLight ? 'on-light' : '',
     compact ? 'compact' : '',
     menuOpen ? 'menu-open' : '',
   ]
@@ -114,43 +99,12 @@ export default function Header({ dark }) {
 
   return (
     <header className={cls}>
-      <div className="topbar">
-        <div className="topbar-inner">
-          <div className="topbar-info">
-            <a href={SITE.phones[0].href}>
-              <Icon name="phone" size={14} />
-              {SITE.phones[0].display}
-            </a>
-            <a href={`mailto:${SITE.email}`}>
-              <Icon name="mail" size={14} />
-              {SITE.email}
-            </a>
-            <span>
-              <Icon name="clock" size={14} />
-              {pick(SITE.hours, lang)}
-            </span>
-          </div>
-          <div className="topbar-social">
-            <a href={SITE.telegram} target="_blank" rel="noreferrer">
-              Telegram
-            </a>
-            <a href={SITE.facebook} target="_blank" rel="noreferrer">
-              Facebook
-            </a>
-            <a href={SITE.instagram} target="_blank" rel="noreferrer">
-              Instagram
-            </a>
-          </div>
-        </div>
-      </div>
       <div className="header-inner">
         <Logo />
 
         <nav className="nav" aria-label="Main">
-          {links.map(([to, label]) => (
-            <NavLink key={to} to={to} end={to === '/'}>
-              {label}
-            </NavLink>
+          {links.map(([to, label], i) => (
+            <NavItem key={to} to={to} label={label} index={i} />
           ))}
         </nav>
 
@@ -164,6 +118,7 @@ export default function Header({ dark }) {
             >
               <Flag lang={lang} width={22} />
               {langs.find((l) => l.id === lang)?.short}
+              <Icon name="chevronDown" size={14} stroke={2} />
             </button>
             <div className="lang-menu">
               {langs.map((l) => (
@@ -201,10 +156,7 @@ export default function Header({ dark }) {
       <div className={menuOpen ? 'mobile-menu open' : 'mobile-menu'}>
         <nav>
           {links.map(([to, label], i) => (
-            <NavLink key={to} to={to} end={to === '/'} style={{ '--i': i }}>
-              <span>{String(i + 1).padStart(2, '0')}</span>
-              {label}
-            </NavLink>
+            <NavItem key={to} to={to} label={label} index={i} mobile />
           ))}
         </nav>
         <div className="mobile-langs">

@@ -9,6 +9,7 @@ import PageHero from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
 import { ArticleCard } from '../components/Cards'
 import Icon from '../components/Icon'
+import articleImage from '../assets/articles.jpg'
 
 export default function Articles() {
   const { t, lang } = useLang()
@@ -76,11 +77,21 @@ export default function Articles() {
   return (
     <>
       <PageHero
+        light
+        image={articleImage}
         kicker={t.articles.kicker}
         title={t.articles.title}
-        lead={`${articles.length} ${t.articles.count}`}
-      />
-      <section className="sec sec-ivory">
+        lead={t.articles.lead}
+      >
+        <div className="ah-meta">
+          <span className="ah-count">
+            <Icon name="book" size={16} />
+            {articles.length} {t.articles.count}
+          </span>
+        </div>
+        <p className="ah-note">{t.articles.note}</p>
+      </PageHero>
+      <section className="sec sec-ivory" id="arxiv">
         <div className="wrap">
           <div className={`filter-carousel ${edges.start || edges.end ? 'scrolls' : ''}`}>
             <button

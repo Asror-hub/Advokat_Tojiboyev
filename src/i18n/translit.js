@@ -14,7 +14,7 @@ const LOAN = [
 ]
 
 // Anything matching this is left untouched: emails, links and markup tags.
-const PROTECT = /([\w.+-]+@[\w-]+(?:\.[\w-]+)+|https?:\/\/\S+|www\.\S+|<[^>]+>)/g
+const PROTECT = /(TEN Duayen by Tojiboev[’']s|[\w.+-]+@[\w-]+(?:\.[\w-]+)+|https?:\/\/\S+|www\.\S+|<[^>]+>)/g
 
 const SINGLE = {
   a: 'а', b: 'б', d: 'д', f: 'ф', g: 'г', h: 'ҳ', i: 'и', j: 'ж', k: 'к', l: 'л',

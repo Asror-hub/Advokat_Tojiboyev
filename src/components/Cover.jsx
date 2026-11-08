@@ -151,3 +151,8 @@ export function Portrait({ photo, className = '' }) {
     </div>
   )
 }
+
+// Home hero backdrop: the photo from src/assets/hero_image.jpeg (via SITE.photo).
+export function HeroScene() {
+  return <img className="hero-lux-photo" src={SITE.photo} alt="" fetchPriority="high" />
+}

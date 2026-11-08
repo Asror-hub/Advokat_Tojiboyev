@@ -1,4 +1,4 @@
-import heroPhoto from '../assets/hero.jpeg'
+import heroPhoto from '../assets/hero_image.jpeg'
 import { deepCyrillic } from '../i18n/translit'
 
 export const SITE = {
@@ -7,10 +7,10 @@ export const SITE = {
   brand: 'ADVOKAT TOJIBOYEV ELDOR',
   // Practice name stays in Latin in every language.
   practice: 'TEN Duayen by Tojiboev’s',
-  initials: 'TE',
+  initials: 'TEN',
   domain: 'advokat-eldor.uz',
   email: 'info@advokat-eldor.uz',
-  // Portrait used in the hero and About page. Replace src/assets/hero.jpeg to change it.
+  // Portrait used in the hero and About page. Replace src/assets/hero_image.jpeg to change it.
   photo: heroPhoto,
   phones: [
     { display: '+998 90 123 45 67', href: 'tel:+998901234567' },
@@ -30,12 +30,8 @@ export const SITE = {
     ru: 'Пн – Пт: 09:00 – 18:00',
     en: 'Mon – Fri: 09:00 – 18:00',
   },
-  stats: [
-    { value: '12+', key: 'years' },
-    { value: '400+', key: 'cases' },
-    // Placeholder - replace with the real success rate.
-    { value: '92%', key: 'success' },
-  ],
+  // Qualitative strengths instead of unverified numbers (labels: t.home.strengths).
+  strengths: ['users', 'search', 'scale'],
 }
 
 // Picks the text for the active language. Uzbek (Cyrillic, "oz") is derived

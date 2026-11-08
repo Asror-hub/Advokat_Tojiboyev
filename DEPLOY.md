@@ -33,6 +33,20 @@ npx wrangler secret put ADMIN_PASSWORD   # type the password you want, 12+ chara
 npx wrangler secret put ADMIN_SECRET     # type any long random text (40+ characters)
 ```
 
+### Contact form -> lawyer's app
+
+Messages from the website form are saved in the Company app's Supabase project (table
+`website_inquiries`). First run `Company_App/supabase/migrations/015_website_inquiries.sql` in the
+Supabase SQL editor, then set two more secrets (the service key is in Supabase > Project Settings > API):
+
+```
+npx wrangler secret put SUPABASE_URL
+npx wrangler secret put SUPABASE_SERVICE_KEY
+```
+
+For local testing put the same two values in `.dev.vars`. Until they are set the form shows
+"could not be sent".
+
 Secrets are stored encrypted by Cloudflare. They are not in the code or on GitHub.
 Changing `ADMIN_PASSWORD` later signs everybody out. Then open `/admin` and log in.
 

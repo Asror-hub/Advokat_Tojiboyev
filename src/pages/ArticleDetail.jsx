@@ -111,20 +111,6 @@ export default function ArticleDetail() {
           </div>
         </div>
 
-        <aside className="cta-card">
-          <div>
-            <h3>{t.services.ctaTitle}</h3>
-            <p>{t.services.ctaText}</p>
-          </div>
-          <Link className="btn btn-gold" to={{ hash: 'aloqa' }}>
-            {t.common.consult}
-            <Icon name="arrow" size={16} />
-          </Link>
-          <a className="cta-phone" href={SITE.phones[0].href}>
-            <Icon name="phone" size={16} />
-            {SITE.phones[0].display}
-          </a>
-        </aside>
 
         <h2 className="related-title">{t.common.related}</h2>
         <div className="grid-3">

@@ -3,6 +3,7 @@ import { useLang } from '../context/LanguageContext'
 import PageHero from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
 import { CaseCard } from '../components/Cards'
+import casesImage from '../assets/cases.jpeg'
 
 export default function Cases() {
   const { t } = useLang()
@@ -11,7 +12,7 @@ export default function Cases() {
 
   return (
     <>
-      <PageHero kicker={t.cases.kicker} title={t.cases.title} lead={t.cases.lead} />
+      <PageHero light image={casesImage} kicker={t.cases.kicker} title={t.cases.title} lead={t.cases.lead} />
       <section className="sec sec-ivory">
         <div className="wrap">
           {first && (
@@ -26,6 +27,7 @@ export default function Cases() {
               </Reveal>
             ))}
           </div>
+          <p className="services-note">{t.cases.note}</p>
         </div>
       </section>
     </>

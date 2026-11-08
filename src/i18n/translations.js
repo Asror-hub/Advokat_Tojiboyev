@@ -1,5 +1,6 @@
 import { deepCyrillic } from './translit'
 import { servicesEn, servicesRu, servicesUz } from './services'
+import { brandEn, brandRu, brandUz } from './brand'
 
 export const LANGS = [
   { id: 'oz', label: 'Ўзбекча', short: 'ЎЗ' },
@@ -731,6 +732,19 @@ export const translations = {
     },
   },
 }
+
+// Brand copy (TEN Duayen by Tojiboev’s) wins over the base text above.
+function merge(base, extra) {
+  const out = { ...base }
+  Object.keys(extra).forEach((k) => {
+    const v = extra[k]
+    out[k] = v && typeof v === 'object' && !Array.isArray(v) && base[k] && typeof base[k] === 'object' ? merge(base[k], v) : v
+  })
+  return out
+}
+translations.uz = merge(translations.uz, brandUz)
+translations.ru = merge(translations.ru, brandRu)
+translations.en = merge(translations.en, brandEn)
 
 // Uzbek (Cyrillic) is generated from the Uzbek (Latin) text above.
 translations.oz = deepCyrillic(translations.uz)

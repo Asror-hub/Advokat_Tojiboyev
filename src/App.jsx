@@ -6,6 +6,8 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
+import Mediation from './pages/Mediation'
+import Team from './pages/Team'
 import Cases from './pages/Cases'
 import CaseDetail from './pages/CaseDetail'
 import Articles from './pages/Articles'
@@ -39,6 +41,8 @@ export default function App() {
               <Route path="/sud-ishlari" element={<Navigate to="/himoya-ishlari" replace />} />
               <Route path="/haqida" element={<About />} />
               <Route path="/xizmatlar" element={<Services />} />
+              <Route path="/mediatsiya" element={<Mediation />} />
+              <Route path="/jamoa" element={<Team />} />
               <Route path="/aloqa" element={<Navigate to="/#aloqa" replace />} />
               <Route path="/maxfiylik" element={<Privacy />} />
               <Route path="/foydalanish-shartlari" element={<Terms />} />

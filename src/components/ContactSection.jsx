@@ -9,7 +9,7 @@ import Icon from './Icon'
 export default function ContactSection() {
   const { t, lang } = useLang()
   const tgUser = '@' + SITE.telegram.replace(/\/+$/, '').split('/').pop()
-  const [form, setForm] = useState({ name: '', phone: '', message: '' })
+  const [form, setForm] = useState({ name: '', phone: '', service: '', message: '', time: '' })
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle')
 
@@ -21,7 +21,7 @@ export default function ContactSection() {
     if (errors[name]) setErrors((er) => ({ ...er, [name]: undefined }))
   }
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
     const next = {}
     if (!form.name.trim()) next.name = t.common.required
@@ -30,10 +30,18 @@ export default function ContactSection() {
     setErrors(next)
     if (Object.keys(next).length) return
     setStatus('sending')
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, lang, website: e.target.elements.website?.value || '' }),
+      })
+      if (!res.ok) throw new Error(String(res.status))
       setStatus('sent')
-      setForm({ name: '', phone: '', message: '' })
-    }, 800)
+      setForm({ name: '', phone: '', service: '', message: '', time: '' })
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -44,7 +52,9 @@ export default function ContactSection() {
           <em>{words[words.length - 1]}</em>
         </h2>
         <span className="orn" />
-        <p className="center-lead">{t.contact.lead}</p>
+        <p className="center-lead">
+          <strong>{t.contact.subtitle}.</strong> {t.contact.lead}
+        </p>
         <p className="reply-note">
           <Icon name="clock" size={16} />
           {t.contact.reply}
@@ -111,7 +121,7 @@ export default function ContactSection() {
           </ul>
         </Reveal>
 
-        <Reveal delay={120}>
+        <Reveal delay={120} className="form-col">
           <form className="form-card" onSubmit={submit} noValidate>
             {status === 'sent' && (
               <div className="success-note" role="status">
@@ -119,6 +129,20 @@ export default function ContactSection() {
                 {t.common.sent}
               </div>
             )}
+            {status === 'error' && (
+              <div className="form-fail" role="alert">
+                {t.common.sendFailed}
+              </div>
+            )}
+            <input
+              className="hp-field"
+              name="website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              defaultValue=""
+            />
             <div className="form-row">
               <label className={errors.name ? 'has-error' : ''}>
                 <span>{t.contact.name} *</span>
@@ -138,13 +162,30 @@ export default function ContactSection() {
                 {errors.phone && <em className="form-error">{errors.phone}</em>}
               </label>
             </div>
+            <div className="form-row">
+              <label>
+                <span>{t.contact.service}</span>
+                <select name="service" value={form.service} onChange={onChange}>
+                  <option value="">{t.contact.servicePh}</option>
+                  {t.contact.services.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span>{t.contact.time}</span>
+                <input name="time" value={form.time} onChange={onChange} placeholder={t.contact.timePh} />
+              </label>
+            </div>
             <label className={errors.message ? 'has-error' : ''}>
               <span>{t.contact.message} *</span>
               <textarea name="message" value={form.message} onChange={onChange} placeholder={t.contact.messagePh} rows={6} />
               {errors.message && <em className="form-error">{errors.message}</em>}
             </label>
             <button className="btn btn-navy btn-lg" type="submit" disabled={status === 'sending'}>
-              {status === 'sending' ? t.common.sending : t.common.send}
+              {status === 'sending' ? t.common.sending : t.contact.submit}
               <Icon name="send" size={18} />
             </button>
           </form>

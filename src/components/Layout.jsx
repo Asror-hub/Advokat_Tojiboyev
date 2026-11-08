@@ -17,6 +17,9 @@ const DARK_HERO = [
   '/foydalanish-shartlari',
 ]
 
+// Pages whose hero is light: the header starts transparent with dark text.
+const LIGHT_HERO = ['/', '/xizmatlar', '/himoya-ishlari', '/maqolalar', '/haqida']
+
 export default function Layout() {
   const { t } = useLang()
   const location = useLocation()
@@ -51,7 +54,7 @@ export default function Layout() {
       <a className="skip" href="#main">
         {t.common.skip}
       </a>
-      <Header dark={dark} />
+      <Header dark={dark} light={LIGHT_HERO.includes(path)} />
       <main id="main" className={dark ? '' : 'pad-top'}>
         <Outlet />
       </main>

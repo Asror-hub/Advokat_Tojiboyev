@@ -2,19 +2,19 @@ import { Link } from 'react-router-dom'
 import { SITE } from '../data/site'
 import { useLang } from '../context/LanguageContext'
 import PageHero from '../components/PageHero'
-import { Reveal, CountUp } from '../components/Reveal'
+import { Reveal } from '../components/Reveal'
 import { Portrait } from '../components/Cover'
 import Icon from '../components/Icon'
+import aboutImage from '../assets/about.png'
 
-const PRINCIPLE_ICONS = ['scale', 'users', 'shield']
+const PRINCIPLE_ICONS = ['scale', 'gavel', 'shield', 'users', 'link']
 
 export default function About() {
   const { t } = useLang()
-  const statLabel = { years: t.home.yearsLabel, cases: t.home.casesLabel, success: t.home.successLabel }
 
   return (
     <>
-      <PageHero kicker={t.about.kicker} title={t.about.title} lead={t.about.role} />
+      <PageHero light image={aboutImage} kicker={t.about.kicker} title={t.about.title} lead={t.about.role} />
 
       <section className="sec sec-ivory">
         <div className="wrap about-grid">
@@ -54,19 +54,17 @@ export default function About() {
               <p className="lead-big">{t.about.p1}</p>
             </Reveal>
             <Reveal className="about-stats">
-              {SITE.stats.map((s) => (
-                <div key={s.key}>
+              {SITE.strengths.map((icon, i) => (
+                <div key={icon}>
                   <b>
-                    <CountUp value={s.value} />
+                    <Icon name={icon} size={30} stroke={1.4} />
                   </b>
-                  <span>{statLabel[s.key]}</span>
+                  <span>{t.home.strengths[i]}</span>
                 </div>
               ))}
             </Reveal>
             <Reveal>
               <p>{t.about.p2}</p>
-              <p>{t.about.p3}</p>
-              <p>{t.about.p4}</p>
             </Reveal>
             <Reveal className="hero-actions dark-text">
               <Link className="btn btn-navy btn-lg" to={{ hash: 'aloqa' }}>
@@ -107,18 +105,9 @@ export default function About() {
           <Reveal className="center-head">
             <div className="kicker kicker-line">{t.about.kicker}</div>
             <h2>{t.about.awards}</h2>
+            <span className="orn" aria-hidden="true" />
+            <p className="center-lead">{t.about.mission}</p>
           </Reveal>
-          <div className="vtimeline">
-            {t.about.awardItems.map((a, i) => (
-              <Reveal className="vt-item" key={a.y} delay={i * 80}>
-                <span className="vt-year">{a.y}</span>
-                <div className="vt-card">
-                  <h3>{a.t}</h3>
-                  <p>{a.d}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
     </>

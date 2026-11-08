@@ -5,38 +5,51 @@ import { useLang } from '../context/LanguageContext'
 import PageHero from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
 import Icon, { SERVICE_ICONS } from '../components/Icon'
+import servicesImage from '../assets/services.jpg'
 
 export default function Services() {
   const { t } = useLang()
-  const [open, setOpen] = useState(0)
+  // Every service opens and closes on its own, so opening one never moves the content above it
+  // (the old one-at-a-time behaviour made the page jump). On phones all start closed; on larger
+  // screens the first one is open.
+  const [openSet, setOpenSet] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 760px)').matches ? [] : [0],
+  )
+  const toggle = (i) => setOpenSet((cur) => (cur.includes(i) ? cur.filter((x) => x !== i) : [...cur, i]))
+
   const approachWords = t.services.approachTitle.split(' ')
 
   return (
     <>
-      <PageHero title={t.services.title} kicker={SITE.practice}>
-        <p className="page-lead">
-          <strong className="lead-brand">{SITE.practice}</strong> {t.services.lead}
-        </p>
-        <p className="page-lead">{t.services.lead2}</p>
+      <PageHero light image={servicesImage} title={t.services.title} kicker={SITE.practice}>
+        <p className="page-lead">{t.services.lead}</p>
+        {t.services.lead2 && <p className="page-lead">{t.services.lead2}</p>}
+        <div className="phl-actions">
+          <Link className="btn btn-gold btn-lg" to={{ hash: 'aloqa' }}>
+            {t.common.consult}
+            <Icon name="arrow" size={18} />
+          </Link>
+        </div>
       </PageHero>
 
-      <section className="sec sec-ivory">
+      <section className="sec sec-ivory svc-list">
         <div className="wrap narrow">
           <div className="accordion">
             {t.services.items.map((item, i) => (
-              <Reveal key={item.n} delay={Math.min(i, 4) * 60} className={open === i ? 'acc open' : 'acc'}>
+              <Reveal key={item.n} delay={Math.min(i, 4) * 60} className={openSet.includes(i) ? 'acc open' : 'acc'}>
                 <button
                   className="acc-head"
-                  onClick={() => setOpen(open === i ? -1 : i)}
-                  aria-expanded={open === i}
+                  onClick={() => toggle(i)}
+                  aria-expanded={openSet.includes(i)}
                 >
+                  <span className="acc-num" aria-hidden="true">
+                    {item.n}
+                  </span>
                   <span className="bicon">
-                    <Icon name={SERVICE_ICONS[i]} size={24} />
+                    <Icon name={SERVICE_ICONS[i]} size={26} stroke={1.5} />
                   </span>
                   <span className="acc-title">
-                    <small>
-                      {item.n} · {item.k}
-                    </small>
+                    <small>{item.k}</small>
                     <strong>{item.t}</strong>
                   </span>
                   <span className="acc-toggle" aria-hidden="true">

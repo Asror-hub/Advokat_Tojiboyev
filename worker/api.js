@@ -1,5 +1,6 @@
 // The content API: articles + cases, protected admin endpoints, picture uploads.
 //   GET    /api/content                  public
+//   POST   /api/inquiries                public contact form -> lawyer's app (Supabase)
 //   POST   /api/admin/login              { password } -> { token }
 //   GET    /api/admin/session            needs token
 //   POST   /api/admin/upload             raw image bytes -> { url }
@@ -278,9 +279,88 @@ async function admin(request, env, ctx, parts) {
   return json({ error: 'Not found' }, 404)
 }
 
+/* --------------------------------------------------- website contact form */
+
+// POST /api/inquiries  { name, phone, service, message, time, lang, website }
+// The browser never talks to Supabase (the CSP only allows this site). The Worker checks the
+// message and passes it on to the lawyer's app database with a server-side key.
+const INQUIRY_LIMIT = 5 // messages per visitor...
+const INQUIRY_WINDOW = 60 * 60 * 1000 // ...per hour
+
+async function inquiryKey(ip) {
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`inquiry:${ip}`))
+  const hex = [...new Uint8Array(hash)].map((b) => b.toString(16).padStart(2, '0')).join('')
+  return `throttle/inquiry-${hex.slice(0, 24)}`
+}
+
+async function inquiryCount(env, key) {
+  const obj = await env.BUCKET.get(key)
+  if (!obj) return { count: 0, reset: Date.now() + INQUIRY_WINDOW }
+  try {
+    const rec = await obj.json()
+    return rec.reset >= Date.now() ? rec : { count: 0, reset: Date.now() + INQUIRY_WINDOW }
+  } catch {
+    return { count: 0, reset: Date.now() + INQUIRY_WINDOW }
+  }
+}
+
+async function inquiry(request, env) {
+  if (request.method !== 'POST') return json({ error: 'Not found' }, 404)
+  const body = await readJson(request, 16 * 1024)
+
+  // Hidden field that only bots fill in: pretend it worked, store nothing.
+  if (typeof body?.website === 'string' && body.website.trim()) return json({ ok: true })
+
+  const name = text(body?.name, 120)
+  const phone = text(body?.phone, 40)
+  const message = text(body?.message, 4000)
+  if (!name || !phone || !message) bad('Name, phone and message are required')
+  if (!/^[\d\s()+\-.]{5,40}$/.test(phone)) bad('Phone number is invalid')
+
+  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_KEY) {
+    console.error('[inquiry] SUPABASE_URL / SUPABASE_SERVICE_KEY are not set')
+    return json({ error: 'The form is not available right now' }, 503)
+  }
+
+  const ip = clientIp(request)
+  const key = await inquiryKey(ip)
+  const rec = await inquiryCount(env, key)
+  if (rec.count >= INQUIRY_LIMIT) return json({ error: 'Too many messages. Please try again later.' }, 429)
+
+  const row = {
+    name,
+    phone,
+    service: text(body?.service, 200) || null,
+    preferred_time: text(body?.time, 120) || null,
+    message,
+    lang: ['uz', 'ru', 'en'].includes(body?.lang) ? body.lang : null,
+  }
+  const res = await fetch(`${env.SUPABASE_URL.replace(/\/+$/, '')}/rest/v1/website_inquiries`, {
+    method: 'POST',
+    headers: {
+      apikey: env.SUPABASE_SERVICE_KEY,
+      Authorization: `Bearer ${env.SUPABASE_SERVICE_KEY}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+    },
+    body: JSON.stringify(row),
+  })
+  if (!res.ok) {
+    console.error(`[inquiry] Supabase answered ${res.status}: ${(await res.text()).slice(0, 200)}`)
+    return json({ error: 'The message could not be sent' }, 502)
+  }
+
+  rec.count += 1
+  await env.BUCKET.put(key, JSON.stringify(rec))
+  audit(request, 'inquiry', 'received')
+  return json({ ok: true }, 201)
+}
+
 async function route(request, env, ctx) {
   const { pathname } = new URL(request.url)
   const parts = pathname.replace(/^\/api\/?/, '').split('/').filter(Boolean)
+
+  if (parts[0] === 'inquiries' && parts.length === 1) return inquiry(request, env)
 
   if (parts[0] === 'content' && parts.length === 1) {
     if (request.method !== 'GET') return json({ error: 'Not found' }, 404)
