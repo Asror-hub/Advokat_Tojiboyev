@@ -43,5 +43,5 @@ export const pick = (value, lang) => {
     if (value.oz != null) return value.oz
     if (value.uz != null) return deepCyrillic(value.uz)
   }
-  return value[lang] || value.uz || value.en || ''
+  return value[lang] || value.uz || value.en || value.oz || ''
 }
